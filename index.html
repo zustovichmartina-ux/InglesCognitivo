@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Turnos · Inglés Cognitivo</title>
+<meta name="description" content="Clases de inglés online 1 a 1 con la profe Vero. Elegí tu horario y reservá por WhatsApp.">
+<meta property="og:title" content="Turnos · Inglés Cognitivo">
+<meta property="og:description" content="Clases de inglés online 1 a 1 con la profe Vero. Elegí tu horario y reservá por WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22%23D9CAB0%22 stroke=%22%23B5874B%22 stroke-width=%225%22/%3E%3Ctext x=%2250%22 y=%2264%22 font-size=%2244%22 text-anchor=%22middle%22 fill=%22%231D4E9A%22 font-family=%22Georgia%22 font-style=%22italic%22%3EIC%3C/text%3E%3C/svg%3E">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link id="fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Lobster&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap">
+<style id="page-style">
+/* Layout: una columna tipo libreta — logo arriba, días como renglones con turnos en chips */
+:root{
+  --paper:#EDE6DA; --card:#F7F3EC; --ink:#1A2540; --muted:#5E6577;
+  --blue:#1F4FA3; --blue-soft:#DCE4F3; --gold:#B5874B; --line:#D6CBB8;
+  --taken:#C9BFAE; --ok:#2F7A4F;
+  --f-logo:"Kaushan Script","Brush Script MT",cursive;
+  --f-serif:"Libre Baskerville",Georgia,serif;
+  --f-sans:"Figtree",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root[data-theme="never"]{
+  --paper:#111A2E; --card:#18233B; --ink:#EDE6DA; --muted:#A7AEBE;
+  --blue:#8FB0EC; --blue-soft:#22355C; --gold:#D3A86C; --line:#2C3A58; --taken:#3A4560; --ok:#7CC49A; color-scheme:dark}}
+:root[data-theme="never"]{
+  --paper:#111A2E; --card:#18233B; --ink:#EDE6DA; --muted:#A7AEBE;
+  --blue:#8FB0EC; --blue-soft:#22355C; --gold:#D3A86C; --line:#2C3A58; --taken:#3A4560; --ok:#7CC49A; color-scheme:dark}
+html{color-scheme:light}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-size:15px;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+header{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.seal{width:92px;height:92px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;background:var(--card);flex:none}
+.seal span{font-family:var(--f-logo);color:var(--blue);font-size:21px;line-height:.95;text-align:center;transform:rotate(-12deg)}
+.head-txt{min-width:0;flex:1}
+h1{font-family:var(--f-serif);font-weight:700;font-size:clamp(24px,5vw,32px);margin:0;text-wrap:balance;line-height:1.2}
+.sub{color:var(--muted);margin:6px 0 0}
+.rule{height:1px;background:var(--gold);opacity:.6}
+.note{font-size:13px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.dot{width:8px;height:8px;border-radius:50%}
+.example{background:var(--blue-soft);border:1px dashed var(--blue);padding:10px 14px;border-radius:10px;font-size:14px}
+.days{display:flex;flex-direction:column}
+.day{display:grid;grid-template-columns:120px 1fr;gap:16px;padding-block:16px;border-bottom:1px solid var(--line)}
+.day:first-child{border-top:1px solid var(--line)}
+.dname{font-family:var(--f-serif);font-size:17px;line-height:1.2}
+.dname small{display:block;font-family:var(--f-sans);color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:3px}
+.slots{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.slot{font:600 14px var(--f-sans);font-variant-numeric:tabular-nums;padding:8px 14px;border-radius:8px;border:1.5px solid var(--blue);background:var(--card);color:var(--blue);cursor:pointer}
+.slot:hover,.slot:focus-visible{background:var(--blue);color:var(--card);outline:none}
+.slot small{font-weight:500;opacity:.75;margin-left:4px}
+.slot.taken{border-color:var(--taken);color:var(--muted);background:transparent;text-decoration:line-through;cursor:default}
+.slot.sel{background:var(--blue);color:var(--card)}
+.empty{color:var(--muted);font-style:italic;font-family:var(--f-serif)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.panel h2{font-family:var(--f-serif);font-size:19px;margin:0}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:600 14px var(--f-sans);padding:10px 16px;border-radius:999px;border:1.5px solid var(--blue);background:var(--blue);color:var(--card);text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn.ghost{background:transparent;color:var(--blue)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#fff}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.btn[disabled]{opacity:.5;cursor:default}
+.copy{font-family:var(--f-serif);font-style:italic;background:var(--paper);padding:10px 12px;border-radius:8px;user-select:all;word-break:break-word}
+.prices{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.price{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--card)}
+.price b{display:block;font-family:var(--f-serif);font-size:22px;color:var(--blue)}
+.price span{font-size:13px;color:var(--muted)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{font:600 14px var(--f-sans);padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:var(--card)}
+.tabs button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--card)}
+.region{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.rq{font-family:var(--f-serif);font-weight:700;font-size:18px}
+.cgroup{display:flex;flex-direction:column;gap:8px}
+.clabel{font-weight:700;font-size:14px}
+.choices button{text-align:left;font-weight:600}
+.copy{white-space:pre-line}
+.tabs button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+/* admin */
+.admin{border:2px solid var(--gold)}
+.admin .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted);font-weight:600}
+input,select{font:500 15px var(--f-sans);padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);min-width:0}
+.alist{display:flex;flex-direction:column;gap:6px;max-height:340px;overflow:auto}
+.arow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 8px;border-radius:8px;background:var(--paper);font-variant-numeric:tabular-nums}
+.arow span{flex:1;min-width:140px}
+.mini{font:600 12px var(--f-sans);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.mini.on{background:var(--ok);color:#fff;border-color:var(--ok)}
+.status{font-size:13px;color:var(--muted);min-height:1.2em}
+footer{font-size:13px;color:var(--muted);text-align:center}
+footer a{color:var(--blue)}
+@media (max-width:520px){.day{grid-template-columns:1fr;gap:8px}}
+@media (prefers-reduced-motion:no-preference){.slot{transition:background .15s,color .15s}}
+
+/* sello original de la marca: círculo beige, borde dorado fino, cursiva gruesa azul inclinada */
+.logo-txt{font-family:"Lobster","Brush Script MT",cursive!important;color:#1D4E9A!important;line-height:.82!important;text-align:left!important;transform:rotate(-24deg)!important;display:block;white-space:nowrap}
+.logo-txt small{display:block;font-size:.8em;padding-left:.5em}
+.seal span.logo-txt{font-size:21px!important}
+.seal,.s-seal,.ig-av div{background:#D9CAB0!important}
+.seal{border-width:2px!important}.s-seal{border-width:3px!important}
+</style>
+<div id="app" class="wrap">
+  <header>
+    <div class="seal" aria-hidden="true"><span class="logo-txt">Inglés<small>Cognitivo</small></span></div>
+    <div class="head-txt">
+      <h1>Turnos disponibles</h1>
+      <p class="sub">Clases online 1 a 1 con la profe Vero, para Europa y Argentina. Elegí un horario y reservalo por mensaje.</p>
+    </div>
+  </header>
+  <div class="region"><span class="rq">¿Dónde estás?</span><div class="tabs" role="group" aria-label="¿Dónde estás?"><button type="button" id="r-ar" aria-pressed="false">🇦🇷 Estoy en Argentina</button><button type="button" id="r-eu" aria-pressed="false">🇪🇸 Estoy en Europa</button></div></div>
+  <div class="note" id="meta"></div>
+  <div id="example" class="example" hidden>Estos son horarios de ejemplo. La profe los reemplaza por los reales desde el panel de edición.</div>
+  <div class="days" id="days"><p class="empty">Cargando horarios…</p></div>
+  <section class="panel" id="reserve" hidden></section>
+  <section class="panel">
+    <h2>Precios</h2>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-eu" aria-selected="true">🇪🇸 Europa · adultos</button>
+      <button type="button" role="tab" id="tab-ar" aria-selected="false">🇦🇷 Argentina · apoyo escolar</button>
+    </div>
+    <div id="price-eu" role="tabpanel">
+      <div class="prices">
+        <div class="price"><b>€60</b><span>1 clase de 1 h por semana</span></div>
+        <div class="price"><b>€70</b><span>1 clase de 1 h 30 por semana</span></div>
+        <div class="price"><b>€90</b><span>2 clases de 1 h por semana</span></div>
+        <div class="price"><b>€120</b><span>2 clases de 1 h 30 por semana</span></div>
+      </div>
+      <p class="note">Planes mensuales. El pago se realiza antes de la tercera clase del mes.</p>
+    </div>
+    <div id="price-ar" role="tabpanel" hidden>
+      <div class="prices">
+        <div class="price"><b>$20.000</b><span>la hora · Apoyo escolar: primaria, secundaria y preparación de exámenes</span></div>
+        <div class="price"><b>$30.000</b><span>la hora · Apoyo universitario y profesional</span></div>
+      </div>
+      <p class="note">Precios en pesos argentinos. Inglés Cognitivo Junior: todos los niveles, tareas, pruebas, previas y exámenes.</p>
+    </div>
+  </section>
+  <section class="panel admin" id="admin" hidden></section>
+  <footer>Inglés Cognitivo · Aprendé inglés desde la mente, no desde la memoria · <a href="https://www.instagram.com/inglescognitivo/" target="_blank" rel="noopener">@inglescognitivo</a></footer>
+</div>
+<script type="application/json" id="state">{"example":false,"updated":"2026-11-05T12:40:00.000Z","whatsapp":"+34648023338","slots":[{"id":"b1","start":"2026-11-06T08:00:00.000Z","dur":60,"taken":true},{"id":"b2","start":"2026-11-06T09:00:00.000Z","dur":60,"taken":true},{"id":"f3","start":"2026-11-06T10:00:00.000Z","dur":60,"taken":false},{"id":"f4","start":"2026-11-06T11:00:00.000Z","dur":60,"taken":false},{"id":"f5","start":"2026-11-06T12:00:00.000Z","dur":60,"taken":false},{"id":"f6","start":"2026-11-06T14:30:00.000Z","dur":60,"taken":false},{"id":"f7","start":"2026-11-06T15:30:00.000Z","dur":60,"taken":false},{"id":"f8","start":"2026-11-06T16:30:00.000Z","dur":60,"taken":false},{"id":"f9","start":"2026-11-06T17:30:00.000Z","dur":60,"taken":false},{"id":"f10","start":"2026-11-06T18:30:00.000Z","dur":60,"taken":false},{"id":"f11","start":"2026-11-06T19:30:00.000Z","dur":60,"taken":false},{"id":"f12","start":"2026-11-06T20:30:00.000Z","dur":60,"taken":false},{"id":"f13","start":"2026-11-06T21:30:00.000Z","dur":60,"taken":false},{"id":"f22","start":"2026-11-09T08:00:00.000Z","dur":60,"taken":false},{"id":"b14","start":"2026-11-09T09:30:00.000Z","dur":60,"taken":true},{"id":"f23","start":"2026-11-09T10:30:00.000Z","dur":60,"taken":false},{"id":"f24","start":"2026-11-09T11:30:00.000Z","dur":60,"taken":false},{"id":"b15","start":"2026-11-09T12:30:00.000Z","dur":60,"taken":true},{"id":"b16","start":"2026-11-09T15:00:00.000Z","dur":60,"taken":true},{"id":"f25","start":"2026-11-09T16:00:00.000Z","dur":60,"taken":false},{"id":"b17","start":"2026-11-09T17:30:00.000Z","dur":60,"taken":true},{"id":"b18","start":"2026-11-09T19:00:00.000Z","dur":60,"taken":true},{"id":"b19","start":"2026-11-09T20:00:00.000Z","dur":60,"taken":true},{"id":"b20","start":"2026-11-09T21:00:00.000Z","dur":60,"taken":true},{"id":"b21","start":"2026-11-09T22:30:00.000Z","dur":60,"taken":true},{"id":"f29","start":"2026-11-10T08:00:00.000Z","dur":60,"taken":false},{"id":"b26","start":"2026-11-10T09:00:00.000Z","dur":60,"taken":true},{"id":"b27","start":"2026-11-10T10:30:00.000Z","dur":60,"taken":true},{"id":"f30","start":"2026-11-10T11:30:00.000Z","dur":60,"taken":false},{"id":"f31","start":"2026-11-10T12:30:00.000Z","dur":60,"taken":false},{"id":"f32","start":"2026-11-10T14:30:00.000Z","dur":60,"taken":false},{"id":"f33","start":"2026-11-10T15:30:00.000Z","dur":60,"taken":false},{"id":"f34","start":"2026-11-10T16:30:00.000Z","dur":60,"taken":false},{"id":"b28","start":"2026-11-10T18:00:00.000Z","dur":60,"taken":true},{"id":"f35","start":"2026-11-10T19:00:00.000Z","dur":60,"taken":false},{"id":"f36","start":"2026-11-10T20:00:00.000Z","dur":60,"taken":false},{"id":"f37","start":"2026-11-10T21:00:00.000Z","dur":60,"taken":false},{"id":"f43","start":"2026-11-11T08:00:00.000Z","dur":60,"taken":false},{"id":"f44","start":"2026-11-11T09:00:00.000Z","dur":60,"taken":false},{"id":"f45","start":"2026-11-11T10:00:00.000Z","dur":60,"taken":false},{"id":"f46","start":"2026-11-11T11:00:00.000Z","dur":60,"taken":false},{"id":"b38","start":"2026-11-11T12:30:00.000Z","dur":60,"taken":true},{"id":"f47","start":"2026-11-11T14:30:00.000Z","dur":60,"taken":false},{"id":"f48","start":"2026-11-11T15:30:00.000Z","dur":60,"taken":false},{"id":"b39","start":"2026-11-11T16:30:00.000Z","dur":60,"taken":true},{"id":"f49","start":"2026-11-11T17:30:00.000Z","dur":60,"taken":false},{"id":"f50","start":"2026-11-11T18:30:00.000Z","dur":60,"taken":false},{"id":"b40","start":"2026-11-11T20:00:00.000Z","dur":60,"taken":true},{"id":"b41","start":"2026-11-11T21:00:00.000Z","dur":60,"taken":true},{"id":"b42","start":"2026-11-11T22:30:00.000Z","dur":60,"taken":true},{"id":"f55","start":"2026-11-12T08:00:00.000Z","dur":60,"taken":false},{"id":"b51","start":"2026-11-12T09:00:00.000Z","dur":60,"taken":true},{"id":"b52","start":"2026-11-12T10:30:00.000Z","dur":60,"taken":true},{"id":"f56","start":"2026-11-12T11:30:00.000Z","dur":60,"taken":false},{"id":"f57","start":"2026-11-12T12:30:00.000Z","dur":60,"taken":false},{"id":"b53","start":"2026-11-12T15:00:00.000Z","dur":60,"taken":true},{"id":"f58","start":"2026-11-12T16:00:00.000Z","dur":60,"taken":false},{"id":"f59","start":"2026-11-12T17:00:00.000Z","dur":60,"taken":false},{"id":"b54","start":"2026-11-12T18:00:00.000Z","dur":60,"taken":true},{"id":"f60","start":"2026-11-12T19:00:00.000Z","dur":60,"taken":false},{"id":"f61","start":"2026-11-12T20:00:00.000Z","dur":60,"taken":false},{"id":"f62","start":"2026-11-12T21:00:00.000Z","dur":60,"taken":false},{"id":"b63","start":"2026-11-13T08:00:00.000Z","dur":60,"taken":true},{"id":"b64","start":"2026-11-13T09:00:00.000Z","dur":60,"taken":true},{"id":"f65","start":"2026-11-13T10:00:00.000Z","dur":60,"taken":false},{"id":"f66","start":"2026-11-13T11:00:00.000Z","dur":60,"taken":false},{"id":"f67","start":"2026-11-13T12:00:00.000Z","dur":60,"taken":false},{"id":"f68","start":"2026-11-13T14:30:00.000Z","dur":60,"taken":false},{"id":"f69","start":"2026-11-13T15:30:00.000Z","dur":60,"taken":false},{"id":"f70","start":"2026-11-13T16:30:00.000Z","dur":60,"taken":false},{"id":"f71","start":"2026-11-13T17:30:00.000Z","dur":60,"taken":false},{"id":"f72","start":"2026-11-13T18:30:00.000Z","dur":60,"taken":false},{"id":"f73","start":"2026-11-13T19:30:00.000Z","dur":60,"taken":false},{"id":"f74","start":"2026-11-13T20:30:00.000Z","dur":60,"taken":false},{"id":"f75","start":"2026-11-13T21:30:00.000Z","dur":60,"taken":false},{"id":"f84","start":"2026-11-16T08:00:00.000Z","dur":60,"taken":false},{"id":"b76","start":"2026-11-16T09:30:00.000Z","dur":60,"taken":true},{"id":"f85","start":"2026-11-16T10:30:00.000Z","dur":60,"taken":false},{"id":"f86","start":"2026-11-16T11:30:00.000Z","dur":60,"taken":false},{"id":"b77","start":"2026-11-16T12:30:00.000Z","dur":60,"taken":true},{"id":"b78","start":"2026-11-16T15:00:00.000Z","dur":60,"taken":true},{"id":"f87","start":"2026-11-16T16:00:00.000Z","dur":60,"taken":false},{"id":"b79","start":"2026-11-16T17:30:00.000Z","dur":60,"taken":true},{"id":"b80","start":"2026-11-16T19:00:00.000Z","dur":60,"taken":true},{"id":"b81","start":"2026-11-16T20:00:00.000Z","dur":60,"taken":true},{"id":"b82","start":"2026-11-16T21:00:00.000Z","dur":60,"taken":true},{"id":"b83","start":"2026-11-16T22:30:00.000Z","dur":60,"taken":true},{"id":"f91","start":"2026-11-17T08:00:00.000Z","dur":60,"taken":false},{"id":"b88","start":"2026-11-17T09:00:00.000Z","dur":60,"taken":true},{"id":"b89","start":"2026-11-17T10:30:00.000Z","dur":60,"taken":true},{"id":"f92","start":"2026-11-17T11:30:00.000Z","dur":60,"taken":false},{"id":"f93","start":"2026-11-17T12:30:00.000Z","dur":60,"taken":false},{"id":"f94","start":"2026-11-17T14:30:00.000Z","dur":60,"taken":false},{"id":"f95","start":"2026-11-17T15:30:00.000Z","dur":60,"taken":false},{"id":"f96","start":"2026-11-17T16:30:00.000Z","dur":60,"taken":false},{"id":"b90","start":"2026-11-17T18:00:00.000Z","dur":60,"taken":true},{"id":"f97","start":"2026-11-17T19:00:00.000Z","dur":60,"taken":false},{"id":"f98","start":"2026-11-17T20:00:00.000Z","dur":60,"taken":false},{"id":"f99","start":"2026-11-17T21:00:00.000Z","dur":60,"taken":false},{"id":"f105","start":"2026-11-18T08:00:00.000Z","dur":60,"taken":false},{"id":"f106","start":"2026-11-18T09:00:00.000Z","dur":60,"taken":false},{"id":"f107","start":"2026-11-18T10:00:00.000Z","dur":60,"taken":false},{"id":"f108","start":"2026-11-18T11:00:00.000Z","dur":60,"taken":false},{"id":"b100","start":"2026-11-18T12:30:00.000Z","dur":60,"taken":true},{"id":"f109","start":"2026-11-18T14:30:00.000Z","dur":60,"taken":false},{"id":"f110","start":"2026-11-18T15:30:00.000Z","dur":60,"taken":false},{"id":"b101","start":"2026-11-18T16:30:00.000Z","dur":60,"taken":true},{"id":"f111","start":"2026-11-18T17:30:00.000Z","dur":60,"taken":false},{"id":"f112","start":"2026-11-18T18:30:00.000Z","dur":60,"taken":false},{"id":"b102","start":"2026-11-18T20:00:00.000Z","dur":60,"taken":true},{"id":"b103","start":"2026-11-18T21:00:00.000Z","dur":60,"taken":true},{"id":"b104","start":"2026-11-18T22:30:00.000Z","dur":60,"taken":true},{"id":"f117","start":"2026-11-19T08:00:00.000Z","dur":60,"taken":false},{"id":"b113","start":"2026-11-19T09:00:00.000Z","dur":60,"taken":true},{"id":"b114","start":"2026-11-19T10:30:00.000Z","dur":60,"taken":true},{"id":"f118","start":"2026-11-19T11:30:00.000Z","dur":60,"taken":false},{"id":"f119","start":"2026-11-19T12:30:00.000Z","dur":60,"taken":false},{"id":"b115","start":"2026-11-19T15:00:00.000Z","dur":60,"taken":true},{"id":"f120","start":"2026-11-19T16:00:00.000Z","dur":60,"taken":false},{"id":"f121","start":"2026-11-19T17:00:00.000Z","dur":60,"taken":false},{"id":"b116","start":"2026-11-19T18:00:00.000Z","dur":60,"taken":true},{"id":"f122","start":"2026-11-19T19:00:00.000Z","dur":60,"taken":false},{"id":"f123","start":"2026-11-19T20:00:00.000Z","dur":60,"taken":false},{"id":"f124","start":"2026-11-19T21:00:00.000Z","dur":60,"taken":false},{"id":"b125","start":"2026-11-20T08:00:00.000Z","dur":60,"taken":true},{"id":"b126","start":"2026-11-20T09:00:00.000Z","dur":60,"taken":true},{"id":"f127","start":"2026-11-20T10:00:00.000Z","dur":60,"taken":false},{"id":"f128","start":"2026-11-20T11:00:00.000Z","dur":60,"taken":false},{"id":"f129","start":"2026-11-20T12:00:00.000Z","dur":60,"taken":false},{"id":"f130","start":"2026-11-20T14:30:00.000Z","dur":60,"taken":false},{"id":"f131","start":"2026-11-20T15:30:00.000Z","dur":60,"taken":false},{"id":"f132","start":"2026-11-20T16:30:00.000Z","dur":60,"taken":false},{"id":"f133","start":"2026-11-20T17:30:00.000Z","dur":60,"taken":false},{"id":"f134","start":"2026-11-20T18:30:00.000Z","dur":60,"taken":false},{"id":"f135","start":"2026-11-20T19:30:00.000Z","dur":60,"taken":false},{"id":"f136","start":"2026-11-20T20:30:00.000Z","dur":60,"taken":false},{"id":"f137","start":"2026-11-20T21:30:00.000Z","dur":60,"taken":false}]}</script>
+<script id="main">
+(function(){
+  // Snapshot of the page as written, taken before anything renders, so a save republishes the same page with new state.
+  const pristine = {
+    head: document.querySelector('title').outerHTML + document.querySelector('meta[name="claude:viewport-fit-sides"]').outerHTML + document.getElementById('fonts').outerHTML + document.getElementById('page-style').outerHTML,
+    app: document.getElementById('app').outerHTML,
+    script: document.getElementById('main').outerHTML
+  };
+  let state = JSON.parse(document.getElementById('state').textContent);
+  let editable = false, dirty = false, selected = null;
+  const $ = id => document.getElementById(id);
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const ZONES = {ar:['America/Argentina/Buenos_Aires','hora de Argentina'], eu:['Europe/Madrid','hora de España']};
+  let region = /^America\//.test(tz) ? 'ar' : 'eu';
+  try { const r = localStorage.getItem('ic-region'); if (r === 'ar' || r === 'eu') region = r; } catch(e){}
+  let fDay, fDate, fTime, fFull, fKey;
+  function setFormats(){
+    const z = ZONES[region][0];
+    fDay = new Intl.DateTimeFormat('es', {weekday:'long', timeZone:z});
+    fDate = new Intl.DateTimeFormat('es', {day:'numeric', month:'long', timeZone:z});
+    fTime = new Intl.DateTimeFormat('es', {hour:'2-digit', minute:'2-digit', hour12:false, timeZone:z});
+    fFull = new Intl.DateTimeFormat('es', {weekday:'long', day:'numeric', month:'long', hour:'2-digit', minute:'2-digit', hour12:false, timeZone:z});
+    fKey = new Intl.DateTimeFormat('en-CA', {year:'numeric', month:'2-digit', day:'2-digit', timeZone:z});
+  }
+  setFormats();
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+  const dayKey = d => fKey.format(d);
+  const localKey = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const durTxt = m => m === 90 ? '1 h 30' : m === 60 ? '1 h' : m + ' min';
+
+  function renderMeta(){
+    const u = new Date(state.updated);
+    $('meta').innerHTML = '';
+    const a = document.createElement('span'); a.className='pill';
+    a.innerHTML = '<span class="dot" style="background:var(--ok)"></span>';
+    a.append('Actualizado el ' + fDate.format(u));
+    const b = document.createElement('span'); b.className='pill';
+    b.textContent = 'Horarios en ' + ZONES[region][1];
+    $('meta').append(a, b);
+    const num = (state.whatsapp||'').replace(/\D/g,'');
+    if (num){
+      const w = document.createElement('a'); w.className='btn'; w.target='_blank'; w.rel='noopener';
+      w.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Hola Vero! Quiero consultar por las clases de inglés.');
+      w.textContent = 'WhatsApp · +' + num;
+      $('meta').append(w);
+    }
+    $('example').hidden = !state.example;
+  }
+
+  function renderDays(){
+    const now = Date.now();
+    const upcoming = state.slots.filter(s => new Date(s.start).getTime() + s.dur*60000 > now)
+      .sort((a,b) => a.start.localeCompare(b.start));
+    const box = $('days'); box.innerHTML = '';
+    if (!upcoming.length){ box.innerHTML = '<p class="empty">No hay turnos publicados por ahora. Escribile a la profe y te avisa cuando se abran nuevos horarios.</p>'; return; }
+    const groups = new Map();
+    upcoming.forEach(s => { const d = new Date(s.start), k = dayKey(d); if(!groups.has(k)) groups.set(k, {d, list:[]}); groups.get(k).list.push(s); });
+    groups.forEach(({d, list}) => {
+      const row = document.createElement('div'); row.className='day';
+      const nm = document.createElement('div'); nm.className='dname';
+      nm.textContent = cap(fDay.format(d));
+      const sm = document.createElement('small'); sm.textContent = fDate.format(d); nm.append(sm);
+      const sl = document.createElement('div'); sl.className='slots';
+      list.forEach(s => {
+        const b = document.createElement('button'); b.type='button';
+        b.className = 'slot' + (s.taken ? ' taken' : '') + (selected === s.id ? ' sel' : '');
+        b.textContent = fTime.format(new Date(s.start));
+        const dm = document.createElement('small'); dm.textContent = durTxt(s.dur); b.append(dm);
+        if (s.taken){ b.disabled = true; b.setAttribute('aria-label', 'Ocupado'); }
+        else b.onclick = () => { selected = s.id; renderDays(); renderReserve(s); };
+        sl.append(b);
+      });
+      row.append(nm, sl); box.append(row);
+    });
+  }
+
+  const TARIFAS = {
+    eu: ['€60 · 1 clase de 1 h por semana','€70 · 1 clase de 1 h 30 por semana','€90 · 2 clases de 1 h por semana','€120 · 2 clases de 1 h 30 por semana'],
+    ar: ['$20.000 la hora · Apoyo escolar','$30.000 la hora · Universitario y profesional']
+  };
+  const MODALIDADES = {
+    eu: ['Adultos','Junior (niños y adolescentes)','Preparación de exámenes'],
+    ar: ['Primaria','Secundaria','Previas y mesas de examen','Universidad o trabajo']
+  };
+  let pick = {tarifa:null, modo:null, nombre:''};
+  function choiceGroup(label, opts, key, onChange){
+    const wrap = document.createElement('div'); wrap.className = 'cgroup';
+    const l = document.createElement('span'); l.className = 'clabel'; l.textContent = label;
+    const g = document.createElement('div'); g.className = 'tabs choices'; g.setAttribute('role','group'); g.setAttribute('aria-label', label);
+    opts.forEach(o => {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = o;
+      b.setAttribute('aria-pressed', String(pick[key] === o));
+      b.onclick = () => { pick[key] = o; [...g.children].forEach(x => x.setAttribute('aria-pressed', String(x === b))); onChange(); };
+      g.append(b);
+    });
+    wrap.append(l, g); return wrap;
+  }
+  function renderReserve(s){
+    const p = $('reserve'); p.hidden = false; p.innerHTML = '';
+    pick = {tarifa:null, modo:null, nombre:pick.nombre||''};
+    const when = cap(fFull.format(new Date(s.start)));
+    const lugar = region === 'ar' ? 'Argentina' : 'Europa';
+    const h = document.createElement('h2'); h.textContent = 'Reservar: ' + when + ' (' + ZONES[region][1] + ')';
+    const c = document.createElement('div'); c.className='copy';
+    const t = document.createElement('p'); t.className='note';
+    const btns = document.createElement('div'); btns.className='btns';
+    const num = (state.whatsapp||'').replace(/\D/g,'');
+    const w = document.createElement('a'); w.className='btn'; w.target='_blank'; w.rel='noopener'; w.textContent = 'Enviar reserva por WhatsApp';
+    const ig = document.createElement('a'); ig.className = 'btn ghost'; ig.target='_blank'; ig.rel='noopener';
+    ig.href = 'https://ig.me/m/inglescognitivo'; ig.textContent = 'Escribir por Instagram';
+    const cp = document.createElement('button'); cp.type='button'; cp.className='btn ghost'; cp.textContent='Copiar mensaje';
+    const nameL = document.createElement('label'); nameL.textContent = 'Tu nombre (opcional)';
+    const nameI = document.createElement('input'); nameI.type = 'text'; nameI.autocomplete = 'name'; nameI.value = pick.nombre; nameL.append(nameI);
+    function msg(){
+      return 'Hola Vero!' + (pick.nombre ? ' Soy ' + pick.nombre + '.' : '') +
+        ' Quiero reservar el turno del ' + when + ' (' + ZONES[region][1] + ').' +
+        '\nTarifa: ' + (pick.tarifa || '—') +
+        '\nModalidad: ' + (pick.modo || '—') +
+        '\nEstoy en ' + lugar + '. ¿Está disponible?';
+    }
+    function update(){
+      const ok = pick.tarifa && pick.modo;
+      c.textContent = msg();
+      t.textContent = ok ? 'Este es el mensaje que le llega a la profe:' : 'Elegí la tarifa y la modalidad para armar tu mensaje.';
+      c.hidden = !ok; btns.hidden = !ok;
+      if (num) w.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg());
+      cp.textContent = 'Copiar mensaje';
+    }
+    nameI.oninput = e => { pick.nombre = e.target.value.trim(); update(); };
+    cp.onclick = () => {
+      navigator.clipboard.writeText(msg()).then(() => cp.textContent='Copiado', () => { const r=document.createRange(); r.selectNodeContents(c); const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); cp.textContent='Seleccionado, copialo'; });
+    };
+    if (num) btns.append(w); btns.append(ig, cp);
+    p.append(h,
+      choiceGroup('1. Elegí tu tarifa', TARIFAS[region], 'tarifa', update),
+      choiceGroup('2. Elegí la modalidad', MODALIDADES[region], 'modo', update),
+      nameL, t, c, btns);
+    update();
+    p.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+  }
+
+  // ---------- Panel de la profe ----------
+  function toLocalInput(d){ return localKey(d); }
+  function renderAdmin(){
+    const a = $('admin'); a.hidden = false; a.innerHTML = '';
+    a.innerHTML = `
+      <span class="tag">Solo vos ves este panel</span>
+      <h2>Editar turnos</h2>
+      <div class="grid">
+        <label for="f-date">Día<input id="f-date" type="date"></label>
+        <label for="f-time">Hora (tu hora)<input id="f-time" type="time" value="10:00" step="900"></label>
+        <label for="f-dur">Duración<select id="f-dur"><option value="60">1 h</option><option value="90">1 h 30</option></select></label>
+        <label for="f-rep">Repetir<select id="f-rep"><option value="1">Solo ese día</option><option value="4">4 semanas</option><option value="8">8 semanas</option></select></label>
+      </div>
+      <div class="btns"><button type="button" class="btn ghost" id="f-add">Agregar turno</button>
+      ${state.example ? '<button type="button" class="btn ghost" id="f-clear">Borrar horarios de ejemplo</button>' : ''}</div>
+      <label for="f-wa">WhatsApp para reservas (con código de país, ej. 34 600 000 000)<input id="f-wa" type="tel" inputmode="tel"></label>
+      <div class="alist" id="f-list"></div>
+      <div class="btns"><button type="button" class="btn gold" id="f-save">Guardar y publicar</button></div>
+      <div class="status" id="f-status" aria-live="polite"></div>`;
+    $('f-date').value = toLocalInput(new Date(Date.now()+86400000));
+    $('f-wa').value = state.whatsapp || '';
+    $('f-wa').oninput = e => { state.whatsapp = e.target.value.trim(); markDirty(); renderMeta(); };
+    $('f-add').onclick = () => {
+      const d = $('f-date').value, t = $('f-time').value; if(!d||!t){ setStatus('Elegí día y hora.'); return; }
+      const reps = +$('f-rep').value, dur = +$('f-dur').value;
+      for (let i=0;i<reps;i++){
+        const dt = new Date(d+'T'+t); dt.setDate(dt.getDate()+7*i);
+        state.slots.push({id: Math.random().toString(36).slice(2,9), start: dt.toISOString(), dur, taken:false});
+      }
+      markDirty(); refresh(); setStatus(reps>1 ? `Agregados ${reps} turnos. Falta publicar.` : 'Turno agregado. Falta publicar.');
+    };
+    if ($('f-clear')) $('f-clear').onclick = () => { state.slots = []; state.example = false; markDirty(); renderAdmin(); refresh(); setStatus('Ejemplos borrados. Agregá tus horarios y publicá.'); };
+    $('f-save').onclick = save;
+    renderAdminList();
+  }
+  function renderAdminList(){
+    const l = $('f-list'); if(!l) return; l.innerHTML='';
+    const now = Date.now();
+    const list = state.slots.filter(s => new Date(s.start).getTime() > now - 86400000).sort((a,b)=>a.start.localeCompare(b.start));
+    if(!list.length){ l.innerHTML = '<p class="empty">Todavía no cargaste turnos.</p>'; return; }
+    list.forEach(s => {
+      const r = document.createElement('div'); r.className='arow';
+      const sp = document.createElement('span'); sp.textContent = cap(fFull.format(new Date(s.start))) + ' · ' + durTxt(s.dur);
+      const tk = document.createElement('button'); tk.type='button'; tk.className='mini' + (s.taken ? '' : ' on');
+      tk.textContent = s.taken ? 'Reservado' : 'Libre';
+      tk.onclick = () => { s.taken = !s.taken; markDirty(); refresh(); };
+      const del = document.createElement('button'); del.type='button'; del.className='mini'; del.textContent='Quitar';
+      del.onclick = () => { state.slots = state.slots.filter(x => x !== s); markDirty(); refresh(); };
+      r.append(sp, tk, del); l.append(r);
+    });
+  }
+  function setStatus(t){ const s=$('f-status'); if(s) s.textContent=t; }
+  function markDirty(){ dirty = true; setStatus('Hay cambios sin publicar.'); }
+  function refresh(){ renderDays(); renderAdminList(); }
+
+  async function save(){
+    const btn = $('f-save'); btn.disabled = true; setStatus('Publicando…');
+    const art = await claude.use('artifact');
+    if(!art){ setStatus('No se pudo publicar desde esta vista.'); btn.disabled=false; return; }
+    const next = Object.assign({}, state, {updated: new Date().toISOString()});
+    // drop slots older than two weeks so the page stays small
+    next.slots = next.slots.filter(s => new Date(s.start).getTime() > Date.now() - 14*86400000);
+    const json = JSON.stringify(next).replace(/</g,'\\u003c');
+    const html = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>'
+      + pristine.head + pristine.app + '<script type="application/json" id="state">' + json + '<\/script>' + pristine.script + '</body></html>';
+    try { await art.publish(html); dirty = false; setStatus('Publicado. La página se recarga con los turnos nuevos.'); }
+    catch(e){
+      if (e && e.code === 'conflict') setStatus('Hubo otra versión más nueva; la página se recarga con ella.');
+      else if (e && (e.code === 'not_writer' || e.code === 'not_granted')) { setStatus('Esta vista es de solo lectura.'); $('admin').hidden = true; }
+      else { setStatus('No se pudo publicar: ' + (e && e.message || 'error desconocido') + '. Probá de nuevo en un rato.'); btn.disabled=false; }
+    }
+  }
+
+  // precios: Argentina por defecto si el visitante está en hora argentina
+  function showPrices(ar){
+    $('tab-eu').setAttribute('aria-selected', String(!ar)); $('tab-ar').setAttribute('aria-selected', String(ar));
+    $('price-eu').hidden = ar; $('price-ar').hidden = !ar;
+  }
+  $('tab-eu').onclick = () => showPrices(false);
+  $('tab-ar').onclick = () => showPrices(true);
+  function setRegion(r){
+    region = r; setFormats();
+    try { localStorage.setItem('ic-region', r); } catch(e){}
+    $('r-ar').setAttribute('aria-pressed', String(r==='ar')); $('r-eu').setAttribute('aria-pressed', String(r==='eu'));
+    showPrices(r==='ar'); selected = null; $('reserve').hidden = true;
+    renderMeta(); renderDays(); renderAdminList();
+  }
+  $('r-ar').onclick = () => setRegion('ar');
+  $('r-eu').onclick = () => setRegion('eu');
+  $('r-ar').setAttribute('aria-pressed', String(region==='ar')); $('r-eu').setAttribute('aria-pressed', String(region==='eu'));
+  showPrices(region==='ar');
+
+  renderMeta(); renderDays();
+  (async () => {
+    if (!window.claude || !claude.use) return;
+    const user = await claude.use('user');
+    editable = user ? await user.canEdit() : false;
+    if (editable) renderAdmin();
+  })();
+  window.addEventListener('beforeunload', e => { if (dirty){ e.preventDefault(); e.returnValue=''; } });
+})();
+</script>
